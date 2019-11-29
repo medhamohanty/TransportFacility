@@ -1,0 +1,68 @@
+
+<div id="rideForm">
+<form [formGroup]="myform" (ngSubmit)="submit(myform.value)">
+<div><div style="display:inline-block;"><h1>Schedule Ride</h1><div style="display:inline-block;" *ngIf="maxData">
+      <p style="float:right;color:red;font-weight:bold;font-size: medium;">Please enter 6 digit ID number only. </p>
+      </div></div></div>
+   <input type="text" (keypress)="numberOnly($event)" maxlength="6" class="input"
+    placeholder="EmployeeID" [(ngModel)]="rides.EmployeeID" formControlName="EmployeeID">
+   <select formControlName="VehicleType" [(ngModel)]="rides.VehicleType">
+         <option [ngValue]="undefined" hidden selected>select vechile type</option>
+      <option value="Bike">Bike</option>
+      <option value="Car">Car</option>
+    </select>
+
+
+   <input type="text" placeholder="VehicleNo" [(ngModel)]="rides.VehicleNo" formControlName="VehicleNo"  required>
+
+   <input type="text" placeholder="VacantSeats" [(ngModel)]="rides.VacantSeats" formControlName="VacantSeats" required>
+
+   <select formControlName="Time" [(ngModel)]="rides.Time" required>
+         <option [ngValue]="undefined" hidden selected>select Time</option>
+         <option value="9:00 AM">9:00 AM</option>
+         <option value="10:00 AM">10:00 AM</option>
+         <option value="9:00 PM">9:00 PM</option>
+         <option value="10:00 PM">10:00 PM</option>
+       </select>
+
+  
+   <select [(ngModel)]="rides.PickPoints" formControlName="PickPoints" required>
+         <option [ngValue]="undefined" hidden selected>select Pick Point</option>
+         <option value="Kundalahalli Colony">Kundalahalli Colony</option>
+         <option value="Whitefield">Whitefield</option>
+         <option value="Bellandur">Bellandur</option>
+         <option value="10:00 PM">Spice Garden</option>
+       </select>
+   
+  
+   <select [(ngModel)]="rides.Destination" formControlName="Destination" required>
+         <option [ngValue]="undefined" hidden selected>select Drop Point</option>
+         <option value="Trinity Circle">Trinity Circle</option>
+         <option value="Electronic City">Electronic City</option>
+         <option value="Madevpura">Madevpura</option>
+         <option value="Sarjapur">Sarjapur</option>
+       </select>
+   <input value="Submit" [disabled]="!myform.valid" class="buttonStyle" type="submit"> 
+   <button type="reset" class="buttonStyle" style="margin-left: 7px;">Reset</button>
+   
+</form>
+</div>
+
+<div>
+      <h1 style="text-align: center;">Employee Details</h1>
+      
+    </div>
+<table id="employeeList">
+    <th>Employee ID</th><th>Vehicle No</th><th>Vacant Seats</th><th>Vehicle Type</th><th>Time</th><th>Pick Points</th><th>Destination</th>
+    <tr *ngFor="let x of mRideArray;let i = index">
+    <td>{{x.EmployeeID}}</td>
+    <td>{{x.VehicleNo}}</td>
+    <td>{{x.VacantSeats}}</td>
+    <td>{{x.VehicleType}}</td>
+    <td>{{x.Time}}</td>
+    <td>{{x.PickPoints}}</td>
+    <td>{{x.Destination}}</td>
+    </tr>
+    </table>
+
+    
